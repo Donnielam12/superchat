@@ -1,6 +1,6 @@
 CXX=g++
 
-CPPFLAGS=-I/home/bdavis/asio_install/include
+
 
 CXXFLAGS=-Wall -O0 -g -std=c++11 -DASIO_STANDALONE
 
