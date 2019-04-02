@@ -10,14 +10,34 @@ void View:: fileDialog(){}
 void View:: colorText(){}
 string View:: fonts(){}
 void View:: loginScreen(){}
-void View:: Welcome()
+void View:: signUpScreen()
 {
+
 	initscr();
 	noecho();
 	int yMax,xMax,start_y,start_x;
 	getmaxyx(stdscr,yMax,xMax);
-	WINDOW * menu = newwin(5,xMax-12,yMax-8,5);
-	box(menu,0,0);
+	WINDOW * me = newwin(10,xMax-50,yMax-20,5);
+	box(me,0,0);
+	mvwprintw(me,1,1,"Sign Up");
+	refresh();
+	wrefresh(me);
+
+
+}
+void View:: Welcome()
+{
+	initscr();
+	noecho();
+	cbreak();
+	int yMax,xMax,start_y,start_x;
+	getmaxyx(stdscr,yMax,xMax);
+	WINDOW * menu = newwin(10,xMax-50,yMax-20,5);
+	//box(menu,0,0);
+	char space= '*';
+	char ci= ' ';
+	wborder(menu,(int)ci,(int)ci,(int)space,(int)space,(int)'#',(int)'#',(int)'#',(int)'#');
+	
 	refresh();
 	wrefresh(menu);
 	keypad(menu,true);
@@ -30,11 +50,10 @@ void View:: Welcome()
 		{
 
 			if (i==highlight)
-			{
 				wattron(menu,A_REVERSE);
-				mvwprintw(menu,i+1,1,choices[i].c_str());
-				wattroff(menu, A_REVERSE);
-			}
+			mvwprintw(menu,i+1,1,choices[i].c_str());
+			wattroff(menu,A_REVERSE);
+		}
 			choice =wgetch(menu);
 			switch(choice)
 			{
@@ -51,22 +70,23 @@ void View:: Welcome()
 				default:
 					break;
 	
-			}
-
-	
+			}	
+		if(choice==10)//10 means that the user clicked enter.
+		break;
 }
-			if(choice==10)//10 means that the user clicked enter.
-				break;
 
-
-
-}
 printw("You chose %s",choices[highlight].c_str());
+string next = choices[highlight];
+if (next == choices[0])
+signUpScreen();
+else 
+loginScreen();
+
 getch();
 endwin();
 
 }
-void View:: signUpScreen(){}
+
 string View:: help(){}
 void View:: signup(){}
 void View:: signin(){}
