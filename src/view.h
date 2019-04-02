@@ -17,6 +17,7 @@ class View
 		void loginScreen();
 		void signUpScreen();
 		string help();
+		void Welcome();
 		void signup();
 		void signin();
 		void refreshStatus();
