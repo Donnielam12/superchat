@@ -34,13 +34,13 @@ void View:: signUpScreen()
 
         refresh();
         wrefresh(me);
- wrefresh(labelmee);
+	 wrefresh(labelmee);
         wrefresh(labelmeen);
         wrefresh(mee);
         wrefresh(meen);
-
         mvwgetstr(mee,1,1,username);
-        while (username != "go")//this will be modified and used for when a user enters in a username that has already been taken
+        //currently testing, trying to clear username array 
+	/*while (username != "go")//this will be modified and used for when a user enters in a username that has already been taken
         {
                 mvwprintw(labelmee,1,0," Enter a different user name this has already");
                 wrefresh(labelmee);
@@ -49,8 +49,9 @@ void View:: signUpScreen()
 
                 mvwgetstr(mee,1,1,username);
         }
-        mvwgetstr(meen,1,1,password);
-
+        */
+	mvwgetstr(meen,1,1,password);
+	//might add some testing based on if we care about how secure the passwords are
         getch();
         endwin();
 }
