@@ -10,6 +10,13 @@ string View::keyboardShortcut(){}
 void View:: fileDialog(){}
 void View:: colorText(){}
 string View:: fonts(){}
+string View:: help()
+{
+	string rules="General Rules\n1. Be Nice \n2.Treat people how you want to be treated\n3.Have fun";
+	return rules;
+}
+void View:: signup(){}
+void View:: signin(){}
 void View:: loginScreen(){}
 void View:: signUpScreen()
 {
@@ -21,7 +28,8 @@ void View:: signUpScreen()
         WINDOW * labelmeen = newwin(3,xMax-40,yMax-12,10);
         WINDOW * mee = newwin(3,xMax-40,yMax-15,10);
         WINDOW * meen = newwin(3,xMax-40,yMax-10,10);//length,left right, up down, width
-        //box(me,0,0);
+	WINDOW * Grules = newwin(8,xMax-6,yMax-6,5);
+	
 
         mvwprintw(me,1,1,"Sign Up");
         mvwprintw(labelmee,1,0," Enter Username:");
@@ -32,35 +40,41 @@ void View:: signUpScreen()
         box(mee,0,0);
         box(meen,0,0);
 
+
+        mvwprintw(Grules,1,1,help().c_str());//display general rules on sign up screen
+        box(Grules,0,0);
+        wrefresh(Grules);
+
         refresh();
         wrefresh(me);
-	 wrefresh(labelmee);
+	wrefresh(labelmee);
         wrefresh(labelmeen);
         wrefresh(mee);
         wrefresh(meen);
         mvwgetstr(mee,1,1,username);
         //currently testing, trying to clear username array 
-	/*while (username != "go")//this will be modified and used for when a user enters in a username that has already been taken
+	while (strcmp(username, "go")!=0)//this will be modified and used for when a user enters in a username that has already been taken
         {
                 mvwprintw(labelmee,1,0," Enter a different user name this has already");
+	        memset (username,' ',sizeof(username));
+                werase(mee);
+                box(mee,0,0);
                 wrefresh(labelmee);
-                printw("username: %s",username);
-                memset (username,0,sizeof(username));
-
+                wrefresh(mee);
                 mvwgetstr(mee,1,1,username);
-        }
-        */
+	
+	}
+        
 	mvwgetstr(meen,1,1,password);
 	//might add some testing based on if we care about how secure the passwords are
-        getch();
-        endwin();
+
 }
 
 void View:: Welcome()
 {
 	initscr();
 	noecho();
-	cbreak();
+	//cbreak();
 	int yMax,xMax,start_y,start_x;
 	getmaxyx(stdscr,yMax,xMax);
 	WINDOW * menu = newwin(10,xMax-50,yMax-20,5);
@@ -117,13 +131,12 @@ loginScreen();
 
 getch();
 refresh();
+endwin();
 
 //erase();
 }
 
-string View:: help(){}
-void View:: signup(){}
-void View:: signin(){}
+
 void View:: refreshStatus(){}
 int main(int argc, char*argv[])
 {
