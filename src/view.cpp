@@ -15,7 +15,10 @@ string View:: help()
 	string rules="General Rules\n1. Be Nice \n2.Treat people how you want to be treated\n3.Have fun";
 	return rules;
 }
-void View:: signup(){}
+void View:: signup(char * username,char *password)
+{
+//register user into system
+}
 void View:: signin(){}
 void View:: loginScreen(){}
 void View:: signUpScreen()
@@ -51,9 +54,11 @@ void View:: signUpScreen()
         wrefresh(labelmeen);
         wrefresh(mee);
         wrefresh(meen);
+	echo();
         mvwgetstr(mee,1,1,username);
+	noecho();
         //currently testing, trying to clear username array 
-	while (strcmp(username, "go")!=0)//this will be modified and used for when a user enters in a username that has already been taken
+	/*while (strcmp(username, "go")!=0)//this will be modified and used for when a user enters in a username that has already been taken
         {
                 mvwprintw(labelmee,1,0," Enter a different user name this has already");
 	        memset (username,' ',sizeof(username));
@@ -63,11 +68,11 @@ void View:: signUpScreen()
                 wrefresh(mee);
                 mvwgetstr(mee,1,1,username);
 	
-	}
+	}*/
         
 	mvwgetstr(meen,1,1,password);
 	//might add some testing based on if we care about how secure the passwords are
-
+	signup(username,password);
 }
 
 void View:: Welcome()

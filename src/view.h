@@ -18,7 +18,7 @@ class View
 		void signUpScreen();
 		string help();
 		void Welcome();
-		void signup();
+		void signup(char * username,char *password);
 		void signin();
 		void refreshStatus();
 };
