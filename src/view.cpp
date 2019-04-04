@@ -12,7 +12,7 @@ void View:: colorText(){}
 string View:: fonts(){}
 string View:: help()
 {
-	string rules="General Rules\n1. Be Nice \n2.Treat people how you want to be treated\n3.Have fun";
+	string rules="General Rules\n1. Be Nice \n2.Treat people how you want to be treated\n3.Have fun.\n by signing up you agree to this these terms.";
 	return rules;
 }
 void View:: signup(char * username,char *password)
@@ -20,7 +20,99 @@ void View:: signup(char * username,char *password)
 //register user into system
 }
 void View:: signin(){}
-void View:: loginScreen(){}
+void View:: loginScreen()
+{
+
+  int yMax,xMax,start_y,start_x;
+        getmaxyx(stdscr,yMax,xMax);
+        WINDOW * me = newwin(5,xMax-50,yMax-24,26);
+        //WINDOW * mee = newwin(3,xMax-20,yMax-20,10);
+        WINDOW * labelmee = newwin(3,xMax-20,yMax-17,10);
+        WINDOW * mee = newwin(3,xMax-40,yMax-15,10);
+        WINDOW * meen = newwin(3,xMax-40,yMax-10,10);//length,left right, up down, width
+        WINDOW * labelmeen = newwin(3,xMax-40,yMax-12,10);
+        //box(me,0,0);
+        WINDOW * Rememberme = newwin(8,xMax-6,yMax-6,5);
+        mvwprintw(me,1,1,"Sign in");
+        mvwprintw(labelmee,1,0," Enter Username:");
+        mvwprintw(labelmeen,1,0," Enter Password:");
+
+        char  username[100];
+        char  password[100];
+
+        box(mee,0,0);
+        box(meen,0,0);
+        box(Rememberme,0,0);
+
+        refresh();
+        wrefresh(me);
+        wrefresh(labelmee);
+        wrefresh(labelmeen);
+        wrefresh(mee);
+        wrefresh(meen);
+
+
+        mvwgetstr(mee,1,1,username);
+        mvwgetstr(meen,1,1,password);
+                //wclear(mee);
+        /*while (strcmp(username,"go")!=0)//this will be modified and used for when user inputs incorrect info 
+        {
+                mvwprintw(labelmee,1,0,"Enter Username: account does not exsist.Please enter info correctly");
+                memset (username,' ',sizeof(username));
+                memset (password,' ',sizeof(password));
+                werase(mee);
+                werase(meen);
+                box(mee,0,0);
+                box(meen,0,0);
+                wrefresh(labelmee);
+                wrefresh(labelmeen);
+                wrefresh(mee);
+                wrefresh(meen);
+                mvwgetstr(mee,1,1,username);
+             mvwgetstr(meen,1,1,password);
+        }
+*/
+//      refresh();
+
+        wrefresh(Rememberme);
+        keypad(Rememberme,true);
+        string choices[2]={"Yes","No"};
+        int choice;
+        int highlight=0;
+                                mvwprintw(Rememberme,1,1,"Rememeber Me:");
+        while(1)
+        {
+                for(int i=0;i<2;i++)
+                {
+
+                        if (i==highlight)
+                                wattron(Rememberme,A_REVERSE);
+                                mvwprintw(Rememberme,i+2,1,choices[i].c_str());
+                                wattroff(Rememberme,A_REVERSE);
+                }
+                        choice =wgetch(Rememberme);
+                        switch(choice)
+                        {
+                                case KEY_UP:
+                                highlight--;
+                                if(highlight== -1)
+                                        highlight=0;
+                                break;
+                                                     case KEY_DOWN:
+                                        highlight++;
+                                        if(highlight== 2)
+                                                highlight=1;
+                                        break;
+                                default:
+                                        break;
+
+                        }
+                if(choice==10)//10 means that the user clicked enter.
+                break;
+	}
+	 string Remember = choices[highlight];
+
+}
 void View:: signUpScreen()
 {
 	 int yMax,xMax,start_y,start_x;
@@ -125,7 +217,7 @@ void View:: Welcome()
 		break;
 }
 
-printw("You chose %s",choices[highlight].c_str());
+//printw("You chose %s",choices[highlight].c_str());
 string next = choices[highlight];
 clear();
 refresh();
