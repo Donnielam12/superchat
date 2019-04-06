@@ -20,8 +20,8 @@ void View:: mainLobby(char* username)
 	//,start_y,start_x;
         getmaxyx(stdscr,yMax,xMax);
         WINDOW * active = newwin(23,xMax-90,yMax-30,1);
-        WINDOW * sideChats = newwin(23,xMax-89,yMax-30,88);
-        WINDOW * centerChat = newwin(29,xMax-70,yMax-30,34);
+        WINDOW * sideChats = newwin(23,xMax-90,yMax-30,88);
+        WINDOW * centerChat = newwin(29,xMax-85,yMax-30,42);
         WINDOW * Panel1 = newwin(6,xMax-92,yMax-6,1);
         WINDOW * Panel2 = newwin(6,xMax-92,yMax-6,89);
         wborder(active,(int)' ',(int)'#',(int)' ',(int)' ',(int)'#',(int)'#',(int)'#',(int)'#');
@@ -37,7 +37,7 @@ void View:: mainLobby(char* username)
 	//string userc(username);
         refresh();
                      strcpy(usernam,username);
-       			     mvwprintw(centerChat,1,23,"Home");
+       			     mvwprintw(centerChat,1,22,"Home");
         mvwprintw(active,1,1,"Active Friends");
         mvwprintw(sideChats,1,2,"Chats");
 
