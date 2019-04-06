@@ -14,12 +14,13 @@ class View
 		void fileDialog();
 		void colorText();
 		string fonts();
+		void  mainLobby(char *username);
 		void loginScreen();
 		void signUpScreen();
 		string help();
 		void Welcome();
 		void signup(char * username,char *password);
-		void signin();
+		void signin(char * username,char *password);
 		void refreshStatus();
 };
 
