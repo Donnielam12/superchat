@@ -14,7 +14,8 @@ class View
 		void fileDialog();
 		void colorText();
 		string fonts();
-		void  mainLobby(char *username);
+		void  chatRoomScreen(char *username);
+		void  mainLobbyScreen(char *username);
 		void loginScreen();
 		void signUpScreen();
 		string help();

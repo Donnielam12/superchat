@@ -10,7 +10,93 @@ string View::keyboardShortcut(){}
 void View:: fileDialog(){}
 void View:: colorText(){}
 string View:: fonts(){}
-void View:: mainLobby(char* username)
+void View:: chatRoomScreen(char* username)
+{
+        //initscr();
+	clear();
+	//refresh();
+        refresh();
+        int yMax,xMax;
+        getmaxyx(stdscr,yMax,xMax);
+        WINDOW * InputPanel = newwin(6,xMax-33,yMax-6,1);
+        WINDOW * Chat = newwin(24,xMax-30,yMax-30,1);
+        WINDOW * Members = newwin(29,xMax-70,yMax-30,100);
+        wborder(Members,(int)'#',(int)' ',(int)' ',(int)' ',(int)'#',(int)'#',(int)'#',(int)'#');
+        wborder(Chat,(int)' ',(int)' ',(int)'#',(int)' ',(int)'#',(int)'#',(int)'#',(int)'#');
+
+        mvwprintw(Chat,1,33,"NAME OF CHATROOM [HOLDER]");
+        mvwprintw(Members,0,2,"MEMBERS");
+        string choices1[6]={"aa- text color ","bb- text font","cc- filter","dd- Main Lobby","ee- type","ff- FILLER"};
+
+        //will need to set up a for loop to populate the members window with chatroom users names
+
+
+        box(InputPanel,0,0);
+        int watch=0;
+        int column=1;
+        int two=2;
+        for(int i=0;i<6;i++)//displays choices on inputPanel
+	{	
+		if((i%3==0)&&(i!=0))
+                {
+                        column+=17;
+                        two=-1;
+                        if((watch%3==0)&&(watch!=0))
+                                two=-200;
+                        watch=0;
+                }
+                mvwprintw(InputPanel,i+two,column,choices1[i].c_str());
+        }
+        int choice,p1choice,p2choice;
+        wrefresh(Chat);
+        wrefresh(Members);
+        wrefresh(InputPanel);
+        keypad(InputPanel,true);
+        while(1)
+        {
+                p1choice=wgetch(InputPanel);
+                p2choice=wgetch(InputPanel);
+                choice=p1choice;
+                choice=p2choice;
+                switch(choice)
+                {
+
+                        case 97 ://aa
+
+                                break;
+                        case 98 ://bb
+
+                                break;
+                        case 99 ://cc
+
+                                  break;
+                        case 100 ://dd
+				clear();
+	refresh();
+	mainLobbyScreen(username);
+					return;
+                                break;
+                        case 101 ://ee
+
+                                break;
+                        case 102 ://ff
+
+                                break;
+                        case 103 ://gg
+                                break;
+                }
+
+                if (choice==100)
+                        break;
+        }
+
+       // endwin();
+
+
+
+
+}
+void View:: mainLobbyScreen(char* username)
 {
 // noecho();
 	initscr();
@@ -119,6 +205,9 @@ void View:: mainLobby(char* username)
 
                                 break;
                         case 98 ://bb
+				chatRoomScreen(username);
+
+				//refresh();
 
                                 break;
                         case 99 ://cc
@@ -155,6 +244,14 @@ void View:: mainLobby(char* username)
 			   	 break;
 
                 }
+
+				wrefresh(centerChat);
+                                wrefresh(sideChats);
+                                wrefresh(active);
+                                wrefresh(Panel1);
+                                wrefresh(Panel2);
+
+
 
                 if (choice==100)
                         break;
@@ -403,7 +500,7 @@ int main(int argc, char*argv[])
 char name[100]={"apple"};
 View v;
 v.Welcome();
-v.mainLobby(name);
+v.mainLobbyScreen(name);
 getch();
 
 
