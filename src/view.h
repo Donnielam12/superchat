@@ -18,6 +18,8 @@ class View
 		void  mainLobbyScreen(char *username);
 		void loginScreen();
 		void signUpScreen();
+		void logOutScreen();
+		void go2Chats(char* username);
 		string help();
 		void Welcome();
 		void signup(char * username,char *password);

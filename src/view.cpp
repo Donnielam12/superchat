@@ -10,6 +10,79 @@ string View::keyboardShortcut(){}
 void View:: fileDialog(){}
 void View:: colorText(){}
 string View:: fonts(){}
+void View:: logOutScreen()
+{
+//        initscr();
+        refresh();
+        int yMax,xMax,start_y,start_x;
+        getmaxyx(stdscr,yMax,xMax);
+        WINDOW * Bye = newwin(24,xMax-30,yMax-30,1);
+        wborder(Bye,(int)' ',(int)' ',(int)'#',(int)' ',(int)'#',(int)'#',(int)'#',(int)'#');
+        mvwprintw(Bye,10,45," Bye");
+        refresh();
+        wrefresh(Bye);
+	getch();
+	endwin();
+	exit(1);
+}
+void View::go2Chats(char*username)
+{
+	clear();
+ 	refresh();
+        int yMax,xMax,start_y,start_x;
+        getmaxyx(stdscr,yMax,xMax);
+        WINDOW * viewChats = newwin(24,xMax-30,yMax-30,1);
+        wborder(viewChats,(int)' ',(int)' ',(int)' ',(int)' ',(int)'#',(int)'#',(int)'#',(int)'#');
+        mvwprintw(viewChats,1,45,"Chatrooms:");
+
+        keypad(viewChats,true);
+        string choices[2]={"Flowers","Cow"};
+
+
+
+        int highlight=0;
+        int begin=4;
+        int choice;
+        int limit =2;
+        while(1)
+        {
+                for(int i=0;i<limit;i++)//replace 2 with users lobby.size() vector size
+                {
+
+                                               if (i==highlight)
+                                wattron(viewChats,A_REVERSE);
+                                mvwprintw(viewChats,i+begin,45,choices[i].c_str());
+                                wattroff(viewChats,A_REVERSE);
+                }
+                        choice =wgetch(viewChats);
+                        switch(choice)
+                        {
+                                case KEY_UP:
+                                highlight--;
+                                if(highlight== -1)
+                                        highlight=0;
+                                break;
+                                case KEY_DOWN:
+                                        highlight++;
+                                        if(highlight== limit)
+                                                highlight=limit-1;
+                                        break;
+                                default:
+                                        break;
+
+                        }
+                if(choice==10)//10 means that the user clicked enter.
+                break;
+        	}
+//       getch();
+  //      endwin();
+	 string chosenChat = choices[highlight];
+
+//some code is need here to incorporate lobby class	
+	chatRoomScreen(username);
+
+}
+
 void View:: chatRoomScreen(char* username)
 {
         //initscr();
@@ -205,7 +278,7 @@ void View:: mainLobbyScreen(char* username)
 
                                 break;
                         case 98 ://bb
-				chatRoomScreen(username);
+				go2Chats(username);
 
 				//refresh();
 
@@ -214,7 +287,8 @@ void View:: mainLobbyScreen(char* username)
 
 				  break;
                         case 100 ://dd
-
+				clear();
+				logOutScreen();
                                 break;
                         case 101 ://ee
 
@@ -256,6 +330,7 @@ void View:: mainLobbyScreen(char* username)
                 if (choice==100)
                         break;
         }
+	
 	endwin();
 
 }
